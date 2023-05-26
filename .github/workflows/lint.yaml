@@ -1,9 +1,6 @@
 ---
 name: Lint
 
-permissions:
-  contents: read
-
 "on":
   workflow_dispatch:
   push:
@@ -20,9 +17,14 @@ jobs:
     env:
       NIX_CACHE_DIR: /home/runner/.nixcache
       TRUNK_CACHE_DIR: /home/runner/.trunkcache
+    permissions:
+      contents: read
     steps:
       - name: Checkout code
         uses: actions/checkout@v3.5.2
+      - name: Fetch upstream
+        if: github.event_name == 'pull_request'
+        run: git fetch origin ${{ github.event.pull_request.base.ref }}
       - name: Setup Nix cache
         uses: actions/cache@v3.3.1
         id: cache-nix
@@ -43,11 +45,18 @@ jobs:
         if: steps.cache-nix.outputs.cache-hit == 'true'
         run: nix-store --import < ${{ env.NIX_CACHE_DIR }}/archive.nar
       - name: Trunk Check
-        uses: trunk-io/trunk-action@v1.1.1
+        if: github.event_name == 'pull_request'
         env:
           TRUNK_CACHE: ${{ env.TRUNK_CACHE_DIR }}
-        with:
-          cache: false
+        run: |
+          nix develop .#lint --command -- \
+            trunk check --ci \
+              --upstream ${{ github.event.pull_request.base.sha }}
+      - name: Trunk Check
+        if: github.event_name != 'pull_request'
+        env:
+          TRUNK_CACHE: ${{ env.TRUNK_CACHE_DIR }}
+        run: nix develop .#lint --command -- trunk check --ci
       - name: Export Nix store cache
         if: "!cancelled()"
         run: |
