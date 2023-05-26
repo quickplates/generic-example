@@ -53,6 +53,14 @@
             ];
           };
 
+          lint = pkgs.mkShell {
+            name = "lint";
+
+            packages = [
+              pkgs.trunk-io
+            ];
+          };
+
           docs = pkgs.mkShell {
             name = "docs";
 
