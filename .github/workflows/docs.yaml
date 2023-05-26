@@ -38,6 +38,11 @@ jobs:
         with:
           path: ${{ env.TRUNK_CACHE_DIR }}
           key: docs-trunk
+      - name: Setup docs modules cache
+        uses: actions/cache@v3.3.1
+        with:
+          path: docs/node_modules
+          key: docs-modules
       - name: Install Nix
         uses: cachix/install-nix-action@v21
         with:
