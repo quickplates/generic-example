@@ -4,7 +4,7 @@
 
 This is a simple example generic project 👤
 
-[![Docs](https://github.com/quickplates/generic-example/actions/workflows/docs.yaml/badge.svg)](https://github.com/quickplates/generic-example/actions/workflows/docs.yaml)
+[![Lint](https://github.com/quickplates/generic-example/actions/workflows/lint.yaml/badge.svg)](https://github.com/quickplates/generic-example/actions/workflows/lint.yaml)
 
 </div>
 
@@ -14,7 +14,13 @@ This is a simple example generic project 👤
 
 Treat this `README.md` as the landing page for people
 that want to **use** your project.
+
 Write here whatever you want to tell them.
+
+## 📄 Further Reading
+
+More in-depth documentation can be found
+[here](https://quickplates.github.io/generic-example/).
 
 ## 💻 Development
 

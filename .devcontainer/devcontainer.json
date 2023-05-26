@@ -67,6 +67,8 @@
         "jnoortheen.nix-ide",
         // Improved Markdown preview
         "bierner.github-markdown-preview",
+        // SVG preview
+        "jock.svg",
         // GitHub Copilot
         "GitHub.copilot"
       ],
