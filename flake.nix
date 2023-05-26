@@ -49,6 +49,16 @@
             packages = [
               pkgs.trunk-io
               pkgs.nil
+              pkgs.nodejs
+            ];
+          };
+
+          docs = pkgs.mkShell {
+            name = "docs";
+
+            packages = [
+              pkgs.trunk-io
+              pkgs.nodejs
             ];
           };
         };
