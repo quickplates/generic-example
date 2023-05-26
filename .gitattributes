@@ -1,0 +1,6 @@
+.devcontainer/** linguist-vendored
+.github/** linguist-vendored
+.trunk/** linguist-vendored
+.vscode/** linguist-vendored
+docs/** linguist-documentation
+.envrc linguist-vendored
