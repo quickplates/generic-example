@@ -60,9 +60,20 @@ actions:
   definitions:
     # Update flake.lock
     - id: update-flake-lock
+      display_name: Update flake.lock
+      description: Update flake inputs to latest versions
       run: >-
         nix --extra-experimental-features 'nix-command flakes'
         flake update
+    # Run docusaurus
+    - id: docs
+      display_name: Run docusaurus
+      description: Run docusaurus commands
+      run_from: docs
+      interactive: optional
+      run: npm run docs -- "${@}"
   enabled:
     # Update flake.lock
     - update-flake-lock
+    # Run docusaurus
+    - docs

@@ -1,14 +1,18 @@
 #!/usr/bin/env bash
 
-# Setup shell history files
+# Setup shell history cache
 sudo mkdir -p "/shellhistory/${USER}"
 sudo chown -R "${USER}:" "/shellhistory/${USER}"
 touch "/shellhistory/${USER}/.bash_history"
 touch "/shellhistory/${USER}/.zsh_history"
 
-# Setup trunk
+# Setup trunk cache
 sudo mkdir -p "/trunk/${USER}"
 sudo chown -R "${USER}:" "/trunk/${USER}"
+
+# Setup docs node modules
+sudo mkdir -p "/workspace/docs/node_modules"
+sudo chown -R "${USER}:" "/workspace/docs/node_modules"
 
 # Setup bash
 cat <<EOF >>~/.bashrc

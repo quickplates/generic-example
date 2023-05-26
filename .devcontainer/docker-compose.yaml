@@ -20,9 +20,12 @@ services:
       - shellhistory:/shellhistory
       # Mount the trunk cache into the container at /trunk
       - trunk:/trunk
+      # Mount the docs npm modules into the container at appropriate location
+      - docsmodules:/workspace/docs/node_modules
 
 # Named volumes are persisted between container restarts
 volumes:
   nix: {}
   shellhistory: {}
   trunk: {}
+  docsmodules: {}
