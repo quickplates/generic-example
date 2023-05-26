@@ -1,0 +1,6 @@
+---
+# Enable all rules by default
+default: true
+
+# Enable inline HTML
+MD033: false
