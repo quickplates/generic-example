@@ -63,8 +63,26 @@ actions:
       display_name: Update flake.lock
       description: Update flake inputs to latest versions
       run: >-
-        nix --extra-experimental-features 'nix-command flakes'
-        flake update
+        nix
+        --extra-experimental-features 'nix-command flakes'
+        flake
+        update
+    # Update docs dependencies
+    - id: update-docs-deps
+      display_name: Update docs dependencies
+      description: Update docs dependencies to latest versions
+      run_from: docs
+      run: >-
+        npm
+        install
+        --prefer-offline
+        --no-audit
+        --no-fund
+        --quiet
+        --no-progress &&
+        npm
+        run
+        update
     # Run docusaurus
     - id: docs
       display_name: Run docusaurus
@@ -72,10 +90,22 @@ actions:
       run_from: docs
       interactive: optional
       run: >-
-        npm install --prefer-offline --no-audit --silent --no-progress &&
-        npm run docs -- ${@}
+        npm
+        install
+        --prefer-offline
+        --no-audit
+        --no-fund
+        --quiet
+        --no-progress &&
+        npm
+        run
+        docs
+        --
+        ${@}
   enabled:
     # Update flake.lock
     - update-flake-lock
+    # Update docs dependencies
+    - update-docs-deps
     # Run docusaurus
     - docs
