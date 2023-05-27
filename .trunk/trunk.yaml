@@ -14,6 +14,9 @@ runtimes:
     # Needed for prettier
     - node@18.12.1
 lint:
+  disabled:
+    # Disable default nix formatter
+    - nixpkgs-fmt
   definitions:
     # Nix formatting check (local)
     - name: nix-fmt-check
@@ -22,8 +25,11 @@ lint:
       commands:
         - output: pass_fail
           run: >-
-            nix --extra-experimental-features 'nix-command flakes'
-            fmt -- --check path://${target}
+            nix
+            --extra-experimental-features 'nix-command flakes'
+            fmt
+            --
+            --check path://${target}
           success_codes: [0, 1]
     # Nix flake check (local)
     - name: nix-flake-check
@@ -32,8 +38,11 @@ lint:
       commands:
         - output: pass_fail
           run: >-
-            nix --extra-experimental-features 'nix-command flakes'
-            flake check path://${workspace}
+            nix
+            --extra-experimental-features 'nix-command flakes'
+            flake
+            check
+            path://${workspace}
           success_codes: [0, 1]
   enabled:
     # Check for whitespace errors
