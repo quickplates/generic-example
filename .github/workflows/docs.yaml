@@ -1,28 +1,38 @@
 ---
 name: Docs
 
+# Only one workflow can run at a time
+# If there is newer workflow in progress, cancel older ones
 concurrency:
   group: "pages"
   cancel-in-progress: true
 
+# Put 'on' in quotes to avoid YAML parsing error
 "on":
-  workflow_dispatch:
+  # Enable manual triggering
+  workflow_dispatch: {}
+  # Run on commits to main branch
   push:
     branches:
       - main
+    # Run only if there are changes in docs/ or workflow file
     paths:
       - "docs/**"
       - ".github/workflows/docs.yaml"
 
 jobs:
   build:
+    # Pin version of Ubuntu to avoid breaking changes
     runs-on: ubuntu-22.04
+    # Use reasonable timeout to avoid stuck workflows
     timeout-minutes: 5
     env:
       NIX_CACHE_DIR: /home/runner/.nixcache
       TRUNK_CACHE_DIR: /home/runner/.trunkcache
     permissions:
+      # Needed to checkout code
       contents: read
+      # Needed to upload page artifact
       pages: write
     steps:
       - name: Checkout code
@@ -48,6 +58,7 @@ jobs:
         with:
           github_access_token: ${{ github.token }}
           install_url: https://releases.nixos.org/nix/nix-2.15.1/install
+      # See: https://github.com/cachix/install-nix-action/issues/56
       - name: Import Nix store cache
         if: steps.cache-nix.outputs.cache-hit == 'true'
         run: nix-store --import < ${{ env.NIX_CACHE_DIR }}/archive.nar
@@ -63,6 +74,7 @@ jobs:
         uses: actions/upload-pages-artifact@v1.0.8
         with:
           path: docs/build
+      # See: https://github.com/cachix/install-nix-action/issues/56
       - name: Export Nix store cache
         if: "!cancelled()"
         run: |
@@ -70,14 +82,20 @@ jobs:
           nix-store --export $(find /nix/store -maxdepth 1 -name '*-*') \
           > ${{ env.NIX_CACHE_DIR }}/archive.nar
   deploy:
+    # Run only if build job succeeded
     needs: build
+    # Pin version of Ubuntu to avoid breaking changes
     runs-on: ubuntu-22.04
+    # Use reasonable timeout to avoid stuck workflows
     timeout-minutes: 5
+    # Use Pages environment
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     permissions:
+      # Needed to to deploy to Pages
       pages: write
+      # Also needed to deploy to Pages
       id-token: write
     steps:
       - name: Deploy to GitHub Pages

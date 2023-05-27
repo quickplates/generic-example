@@ -2,8 +2,11 @@
 # Enable all rules by default
 default: true
 
-# Enable multiple top level headers
+# Allow multiple top level headers
 MD025: false
 
-# Enable inline HTML
+# Allow inline HTML
 MD033: false
+
+# Allow not using top level header
+MD041: false
