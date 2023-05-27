@@ -25,4 +25,4 @@ More in-depth documentation can be found
 ## 💻 Development
 
 Read more about how to contribute and develop the project
-[here](https://github.com/quickplates/generic-example/CONTRIBUTING.md).
+[here](https://github.com/quickplates/generic-example/blob/main/CONTRIBUTING.md).

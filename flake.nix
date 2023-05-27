@@ -11,6 +11,7 @@
 
   outputs = inputs:
     inputs.flake-parts.lib.mkFlake {inherit inputs;} {
+      # Import local override if it exists
       imports = [
         (
           if builtins.pathExists ./local.nix
@@ -19,6 +20,7 @@
         )
       ];
 
+      # Sensible defaults
       systems = [
         "x86_64-linux"
         "i686-linux"
@@ -33,15 +35,19 @@
         system,
         ...
       }: {
+        # Override pkgs argument
         _module.args.pkgs = import inputs.nixpkgs {
           inherit system;
           config = {
+            # Allow packages with non-free licenses
             allowUnfree = true;
           };
         };
 
+        # Set which formatter should be used
         formatter = pkgs.alejandra;
 
+        # Define multiple development shells for different purposes
         devShells = {
           default = pkgs.mkShell {
             name = "dev";

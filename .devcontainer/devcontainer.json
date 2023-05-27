@@ -74,22 +74,29 @@
       ],
       // Settings to override
       "settings": {
+        // Set Trunk as the default formatter
         "editor.defaultFormatter": "trunk.io",
+        // Enable GitHub Copilot for all languages
+        // For some reason, wildcard alone is not enough
         "github.copilot.enable": {
           "*": true,
           "plaintext": true,
           "markdown": true,
           "scminput": true
         },
+        // Use LSP for Nix
         "nix.enableLanguageServer": true,
+        // Use nil as the language server
         "nix.serverPath": "nil",
         "nix.serverSettings": {
           "nil": {
             "formatting": {
+              // Use 'nix fmt' for formatting
               "command": ["nix", "fmt", "--", "-"]
             }
           }
         },
+        // Use Nix IDE instead of Trunk for Nix files
         "[nix]": {
           "editor.defaultFormatter": "jnoortheen.nix-ide"
         }
