@@ -11,8 +11,10 @@ runtimes:
   enabled:
     # Needed for gitleaks, shfmt, actionlint
     - go@1.19.5
-    # Needed for prettier
+    # Needed for prettier, markdownlint, svgo, eslint
     - node@18.12.1
+    # Needed for yamllint
+    - python@3.10.8
 lint:
   disabled:
     # Disable default nix formatter
@@ -63,6 +65,8 @@ lint:
     - actionlint@1.6.24
     # SVG formatting
     - svgo@3.0.2
+    # JavaScript linting
+    - eslint@8.41.0
     # Nix formatting check
     - nix-fmt-check@SYSTEM
     # Nix flake check
