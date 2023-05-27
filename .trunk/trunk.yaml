@@ -52,6 +52,8 @@ lint:
     - shfmt@3.5.0
     # GitHub Actions linting
     - actionlint@1.6.24
+    # SVG formatting
+    - svgo@3.0.2
     # Nix formatting check
     - nix-fmt-check@SYSTEM
     # Nix flake check
