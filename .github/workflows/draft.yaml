@@ -1,6 +1,12 @@
 ---
 name: Draft
 
+# Only one workflow can run at a time
+# If there is newer workflow in progress, cancel older ones
+concurrency:
+  group: draft
+  cancel-in-progress: true
+
 # Put 'on' in quotes to avoid YAML parsing error
 "on":
   # Enable manual triggering

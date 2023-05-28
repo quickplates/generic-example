@@ -4,7 +4,7 @@ name: Docs
 # Only one workflow can run at a time
 # If there is newer workflow in progress, cancel older ones
 concurrency:
-  group: "pages"
+  group: docs
   cancel-in-progress: true
 
 # Put 'on' in quotes to avoid YAML parsing error
