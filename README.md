@@ -2,7 +2,7 @@
 
 <div align="center">
 
-This is a simple example generic project 👤
+Generic project example 👤
 
 [![Lint](https://github.com/quickplates/generic-example/actions/workflows/lint.yaml/badge.svg)](https://github.com/quickplates/generic-example/actions/workflows/lint.yaml)
 

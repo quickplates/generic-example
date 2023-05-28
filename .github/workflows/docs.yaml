@@ -22,6 +22,7 @@ concurrency:
 
 jobs:
   build:
+    name: Build docs
     # Pin version of Ubuntu to avoid breaking changes
     runs-on: ubuntu-22.04
     # Use reasonable timeout to avoid stuck workflows
@@ -82,6 +83,7 @@ jobs:
           nix-store --export $(find /nix/store -maxdepth 1 -name '*-*') \
           > ${{ env.NIX_CACHE_DIR }}/archive.nar
   deploy:
+    name: Deploy docs
     # Run only if build job succeeded
     needs: build
     # Pin version of Ubuntu to avoid breaking changes
