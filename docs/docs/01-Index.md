@@ -5,7 +5,7 @@ title: Index
 
 # generic-example
 
-This is a simple example generic project 👤
+Generic project example 👤
 
 ## 💡 About
 

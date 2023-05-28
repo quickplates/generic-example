@@ -16,6 +16,7 @@ name: Lint
 
 jobs:
   lint:
+    name: Lint
     # Pin version of Ubuntu to avoid breaking changes
     runs-on: ubuntu-22.04
     # Use reasonable timeout to avoid stuck workflows
