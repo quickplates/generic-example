@@ -15,6 +15,6 @@ exclude-labels:
   - "skip-changelog"
 change-title-escapes: '\<*_&'
 template: |
-  ## WHAT'S NEW
+  # CHANGELOG
 
   $CHANGES
