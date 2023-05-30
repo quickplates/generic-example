@@ -1,0 +1,38 @@
+---
+name: Draft
+
+# Only one workflow can run at a time
+# If there is newer workflow in progress, cancel older ones
+concurrency:
+  group: draft
+  cancel-in-progress: true
+
+# Put 'on' in quotes to avoid YAML parsing error
+"on":
+  # Enable manual triggering
+  workflow_dispatch: {}
+  # Run on commits to main branch
+  push:
+    branches:
+      - main
+
+jobs:
+  draft:
+    name: Draft release
+    # Pin version of Ubuntu to avoid breaking changes
+    runs-on: ubuntu-22.04
+    # Use reasonable timeout to avoid stuck workflows
+    timeout-minutes: 5
+    permissions:
+      # Needed to create release
+      contents: write
+      # Needed to read pull requests for changelog
+      pull-requests: read
+    steps:
+      - name: Draft release
+        uses: release-drafter/release-drafter@v5.23.0
+        with:
+          config-name: release-drafter.yaml
+          disable-autolabeler: true
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
