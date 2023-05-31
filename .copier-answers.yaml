@@ -1,0 +1,10 @@
+---
+# Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
+_commit: bfe62cc
+_src_path: ./
+description: Generic project example 👤
+docs: true
+docs_url: https://quickplates.github.io/generic-example
+project_name: generic-example
+repository: https://github.com/quickplates/generic-example
+username: quickplates
