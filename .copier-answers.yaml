@@ -1,0 +1,11 @@
+# Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
+_commit: 99ff2f4
+_src_path: ./
+accountname: foo
+description: Example project
+docs: true
+docsurl: https://foo.github.io/foo
+projectname: foo
+releases: true
+reponame: foo
+repourl: https://github.com/foo/foo
